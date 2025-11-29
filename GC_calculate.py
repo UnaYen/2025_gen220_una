@@ -212,13 +212,14 @@ def main():
             print(f"❌ Error processing {fasta_file}: {e}", file=sys.stderr)
             continue
     
-    # Write summary table
+    # Write summary table (tab-delimited)
     print(f"\n✓ Saving summary to {summary_output}...")
     with open(summary_output, 'w') as f:
-        f.write(f"{'Filename':<50} {'Final GC%':<12}\n")
-        f.write(f"{'-'*62}\n")
+        # Header
+        f.write(f"Filename\tFinal_GC%\n")
+        # Data rows
         for filename, gc_percent in sorted(summary_data):
-            f.write(f"{filename:<50} {gc_percent:>10.2f}%\n")
+            f.write(f"{filename}\t{gc_percent:.2f}\n")
     
     print(f"✓ Saving details to {detail_output}...")
     print(f"\n✅ Complete! Output files created:")
