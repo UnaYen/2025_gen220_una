@@ -1,0 +1,12 @@
+Filename                                           Final GC%   
+--------------------------------------------------------------
+Alistipes_shahii_DA73_core_CDS.fna                      61.47%
+Bacteroides_intestinalis_APC919_core_CDS.fna            44.56%
+Bacteroides_thetaiotaomicron_VPI-5482_core_CDS.fna      45.38%
+Bacteroides_thetaiotaomicron_jmh43_core_CDS.fna         45.51%
+Bacteroides_uniformis_ATCC_core_CDS.fna                 49.01%
+Escherichia_coli_BL21_core_CDS.fna                      53.06%
+Escherichia_coli_MG1655_core_CDS.fna                    53.08%
+Parabacteroides_distasonis_DA491_core_CDS.fna           47.25%
+Phocaeicola_dorei_HM719_core_CDS.fna                    43.06%
+Phocaeicola_vulgatus_ATCC_core_CDS.fna                  43.78%

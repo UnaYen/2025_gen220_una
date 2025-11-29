@@ -107,22 +107,24 @@ def find_fasta_files(directory, pattern="*_CDS.fna"):
     file_path = os.path.join(directory, pattern)
     return sorted(glob.glob(file_path))
 
-def print_report(filename, gc_distribution, individual_gc, overall_gc, total_length):
+def print_report(filename, gc_distribution, individual_gc, overall_gc, total_length, detail_file=None):
     """
-    Print formatted report of GC content analysis
+    Print formatted report of GC content analysis and optionally save to file
     """
-    print(f"\n{'='*70}")
-    print(f"GC Content Analysis Report")
-    print(f"{'='*70}")
-    print(f"File: {filename}")
-    print(f"Total sequences: {len(individual_gc)}")
-    print(f"Total length: {total_length:,} bp")
-    print(f"Overall GC content: {overall_gc:.2f}%")
-    print(f"\n{'-'*70}")
+    report_lines = []
+    
+    report_lines.append(f"\n{'='*70}")
+    report_lines.append(f"GC Content Analysis Report")
+    report_lines.append(f"{'='*70}")
+    report_lines.append(f"File: {filename}")
+    report_lines.append(f"Total sequences: {len(individual_gc)}")
+    report_lines.append(f"Total length: {total_length:,} bp")
+    report_lines.append(f"Overall GC content: {overall_gc:.2f}%")
+    report_lines.append(f"\n{'-'*70}")
     
     # Print distribution histogram
-    print(f"{'GC Content Bin':<20} {'Count':<10} {'Percentage':<15}")
-    print(f"{'-'*70}")
+    report_lines.append(f"{'GC Content Bin':<20} {'Count':<10} {'Percentage':<15}")
+    report_lines.append(f"{'-'*70}")
     
     # Sort bins for display
     bin_order = sorted(gc_distribution.keys(), key=lambda x: int(x.split('-')[0]))
@@ -132,9 +134,21 @@ def print_report(filename, gc_distribution, individual_gc, overall_gc, total_len
         count = gc_distribution[bin_range]
         percentage = (count / total_sequences * 100) if total_sequences > 0 else 0
         bar = '█' * int(percentage / 2)  # Visual bar (2% per block)
-        print(f"{bin_range:<20} {count:<10} {percentage:>6.2f}%  {bar}")
+        report_lines.append(f"{bin_range:<20} {count:<10} {percentage:>6.2f}%  {bar}")
     
-    print(f"{'-'*70}\n")
+    report_lines.append(f"{'-'*70}\n")
+    
+    # Print to console
+    for line in report_lines:
+        print(line)
+    
+    # Save to detail file if provided
+    if detail_file:
+        with open(detail_file, 'a') as f:
+            for line in report_lines:
+                f.write(line + '\n')
+    
+    return overall_gc
 
 def main():
     """
@@ -147,7 +161,18 @@ def main():
         print("  python3 GC_calculate.py core_gene          # Specify directory")
         print("  python3 GC_calculate.py core_gene '*_CDS.fna'  # Custom pattern")
         print("  python3 GC_calculate.py /path/to/file.fna  # Single file")
+        print("\nOutput files:")
+        print("  - GC_calculate_output_detail.txt  (detailed analysis)")
+        print("  - GC_calculate_output_summary.txt (summary table)")
         sys.exit(1)
+    
+    # Output files
+    detail_output = "GC_calculate_output_detail.txt"
+    summary_output = "GC_calculate_output_summary.txt"
+    
+    # Clear output files if they exist
+    open(detail_output, 'w').close()
+    open(summary_output, 'w').close()
     
     # Determine input
     input_arg = sys.argv[1]
@@ -167,6 +192,9 @@ def main():
         print(f"❌ Invalid input: '{input_arg}' is neither a file nor a directory")
         sys.exit(1)
     
+    # Store summary data
+    summary_data = []
+    
     # Process each file
     for fasta_file in files_to_process:
         print(f"📖 Processing: {fasta_file}")
@@ -174,18 +202,28 @@ def main():
         try:
             gc_distribution, individual_gc, overall_gc, total_length = analyze_gc_content(fasta_file)
             
-            # Print report
-            print_report(os.path.basename(fasta_file), gc_distribution, individual_gc, overall_gc, total_length)
+            # Print report and save to detail file
+            print_report(os.path.basename(fasta_file), gc_distribution, individual_gc, overall_gc, total_length, detail_output)
             
-            # Optional: Show top sequences by GC content (uncomment if needed)
-            # print(f"Top 10 highest GC content sequences:")
-            # sorted_gc = sorted(individual_gc, key=lambda x: x[1], reverse=True)
-            # for i, (header, gc_pct, length) in enumerate(sorted_gc[:10], 1):
-            #     print(f"  {i:2d}. {header[:50]:<50} {gc_pct:>6.2f}%  ({length} bp)")
+            # Store summary data
+            summary_data.append((os.path.basename(fasta_file), overall_gc))
             
         except Exception as e:
             print(f"❌ Error processing {fasta_file}: {e}", file=sys.stderr)
             continue
+    
+    # Write summary table
+    print(f"\n✓ Saving summary to {summary_output}...")
+    with open(summary_output, 'w') as f:
+        f.write(f"{'Filename':<50} {'Final GC%':<12}\n")
+        f.write(f"{'-'*62}\n")
+        for filename, gc_percent in sorted(summary_data):
+            f.write(f"{filename:<50} {gc_percent:>10.2f}%\n")
+    
+    print(f"✓ Saving details to {detail_output}...")
+    print(f"\n✅ Complete! Output files created:")
+    print(f"   - {detail_output}")
+    print(f"   - {summary_output}")
 
 if __name__ == "__main__":
     main()
