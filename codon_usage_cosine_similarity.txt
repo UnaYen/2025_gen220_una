@@ -1,32 +1,31 @@
-Reference_File	Pv_PV01_genomic.fna
-Filename	Cosine_Similarity
-Alistipes_shahii_DA73_cds_from_genomic.fna	0.723447
-Alistipes_shahii_DA73_core_CDS.fna	0.650211
-Alistipes_shahii_DA73_other_CDS.fna	0.771903
-Bacteroides_intestinalis_APC919_cds_from_genomic.fna	0.949423
-Bacteroides_intestinalis_APC919_core_CDS.fna	0.929262
-Bacteroides_intestinalis_APC919_other_CDS.fna	0.962501
-Bacteroides_thetaiotaomicron_VPI-5482_cds_from_genomic.fna	0.952830
-Bacteroides_thetaiotaomicron_VPI-5482_core_CDS.fna	0.930495
-Bacteroides_thetaiotaomicron_VPI-5482_other_CDS.fna	0.965543
-Bacteroides_thetaiotaomicron_jmh43_Host_clean_CDS.fna	0.947813
-Bacteroides_thetaiotaomicron_jmh43_core_CDS.fna	0.928271
-Bacteroides_thetaiotaomicron_jmh43_other_CDS.fna	0.961916
-Bacteroides_uniformis_ATCC_cds_from_genomic.fna	0.920595
-Bacteroides_uniformis_ATCC_core_CDS.fna	0.892246
-Bacteroides_uniformis_ATCC_other_CDS.fna	0.947452
-Escherichia_coli_BL21_cds_from_genomic.fna	0.851921
-Escherichia_coli_BL21_core_CDS.fna	0.810241
-Escherichia_coli_BL21_other_CDS.fna	0.860788
-Escherichia_coli_MG1655_cds_from_genomic.fna	0.849800
-Escherichia_coli_MG1655_core_CDS.fna	0.810836
-Escherichia_coli_MG1655_other_CDS.fna	0.858462
-Parabacteroides_distasonis_DA491_cds_from_genomic.fna	0.934188
-Parabacteroides_distasonis_DA491_core_CDS.fna	0.904371
-Parabacteroides_distasonis_DA491_other_CDS.fna	0.951614
-Phocaeicola_dorei_HM719_Host_clean_CDS.fna	0.955987
-Phocaeicola_dorei_HM719_core_CDS.fna	0.940406
-Phocaeicola_dorei_HM719_other_CDS.fna	0.973133
-Phocaeicola_vulgatus_ATCC_Host_clean_CDS.fna	0.951086
-Phocaeicola_vulgatus_ATCC_core_CDS.fna	0.930982
-Phocaeicola_vulgatus_ATCC_other_CDS.fna	0.966637
+Filename	Pv_PV01_genomic.fna	Pd_p00_genomic.fna
+Alistipes_shahii_DA73_cds_from_genomic.fna	0.723447	0.870199
+Alistipes_shahii_DA73_core_CDS.fna	0.650211	0.816167
+Alistipes_shahii_DA73_other_CDS.fna	0.771903	0.903254
+Bacteroides_intestinalis_APC919_cds_from_genomic.fna	0.949423	0.928525
+Bacteroides_intestinalis_APC919_core_CDS.fna	0.929262	0.922726
+Bacteroides_intestinalis_APC919_other_CDS.fna	0.962501	0.930010
+Bacteroides_thetaiotaomicron_VPI-5482_cds_from_genomic.fna	0.952830	0.942625
+Bacteroides_thetaiotaomicron_VPI-5482_core_CDS.fna	0.930495	0.941174
+Bacteroides_thetaiotaomicron_VPI-5482_other_CDS.fna	0.965543	0.939488
+Bacteroides_thetaiotaomicron_jmh43_Host_clean_CDS.fna	0.947813	0.946359
+Bacteroides_thetaiotaomicron_jmh43_core_CDS.fna	0.928271	0.941294
+Bacteroides_thetaiotaomicron_jmh43_other_CDS.fna	0.961916	0.948959
+Bacteroides_uniformis_ATCC_cds_from_genomic.fna	0.920595	0.959216
+Bacteroides_uniformis_ATCC_core_CDS.fna	0.892246	0.949265
+Bacteroides_uniformis_ATCC_other_CDS.fna	0.947452	0.964748
+Escherichia_coli_BL21_cds_from_genomic.fna	0.851921	0.922882
+Escherichia_coli_BL21_core_CDS.fna	0.810241	0.895858
+Escherichia_coli_BL21_other_CDS.fna	0.860788	0.928126
+Escherichia_coli_MG1655_cds_from_genomic.fna	0.849800	0.921899
+Escherichia_coli_MG1655_core_CDS.fna	0.810836	0.896816
+Escherichia_coli_MG1655_other_CDS.fna	0.858462	0.927017
+Parabacteroides_distasonis_DA491_cds_from_genomic.fna	0.934188	0.948585
+Parabacteroides_distasonis_DA491_core_CDS.fna	0.904371	0.931015
+Parabacteroides_distasonis_DA491_other_CDS.fna	0.951614	0.957238
+Phocaeicola_dorei_HM719_Host_clean_CDS.fna	0.955987	0.930354
+Phocaeicola_dorei_HM719_core_CDS.fna	0.940406	0.915080
+Phocaeicola_dorei_HM719_other_CDS.fna	0.973133	0.950191
+Phocaeicola_vulgatus_ATCC_Host_clean_CDS.fna	0.951086	0.928350
+Phocaeicola_vulgatus_ATCC_core_CDS.fna	0.930982	0.916324
+Phocaeicola_vulgatus_ATCC_other_CDS.fna	0.966637	0.936634

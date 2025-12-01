@@ -288,21 +288,64 @@ def main():
         similarity_output = "codon_usage_cosine_similarity.txt"
         similarities = []
         
-        with open(similarity_output, 'w') as f:
-            # Write reference file information as first line
-            f.write(f"Reference_File\t{reference_name}\n")
-            f.write(f"Filename\tCosine_Similarity\n")
+        # Check if file exists
+        file_exists = os.path.isfile(similarity_output)
+        
+        # Read existing data if file exists
+        existing_headers = []
+        existing_data = {}
+        if file_exists:
+            with open(similarity_output, 'r') as f:
+                lines = f.readlines()
+                # Get headers and data from existing file
+                if lines:
+                    headers = lines[0].strip().split('\t')
+                    existing_headers = headers[1:]  # Skip 'Filename'
+                
+                # Collect all data rows
+                for line in lines[1:]:
+                    parts = line.strip().split('\t')
+                    if parts:
+                        filename = parts[0]
+                        values = parts[1:]
+                        existing_data[filename] = values
+        
+        # Calculate new similarities
+        new_similarities = {}
+        for filename in sorted(all_rscu.keys()):
+            if filename == reference_name:
+                continue
             
-            for filename in sorted(all_rscu.keys()):
-                if filename == reference_name:
-                    continue
+            rscu = all_rscu[filename]
+            similarity = cosine_similarity(reference_rscu, rscu)
+            new_similarities[filename] = similarity
+            similarities.append((filename, similarity))
+            print(f"{filename:<50} {similarity:.6f}")
+        
+        # Write output with updated columns
+        with open(similarity_output, 'w') as f:
+            # Build headers
+            headers = ['Filename'] + existing_headers + [reference_name]
+            f.write('\t'.join(headers) + '\n')
+            
+            # Write data rows
+            all_filenames = sorted(set(list(existing_data.keys()) + list(new_similarities.keys())))
+            for filename in all_filenames:
+                row = [filename]
                 
-                rscu = all_rscu[filename]
-                similarity = cosine_similarity(reference_rscu, rscu)
-                similarities.append((filename, similarity))
+                # Add existing data if present
+                if filename in existing_data:
+                    row.extend(existing_data[filename])
+                else:
+                    row.extend([''] * len(existing_headers))
                 
-                f.write(f"{filename}\t{similarity:.6f}\n")
-                print(f"{filename:<50} {similarity:.6f}")
+                # Add new similarity data
+                if filename in new_similarities:
+                    row.append(f"{new_similarities[filename]:.6f}")
+                else:
+                    row.append('')
+                
+                f.write('\t'.join(row) + '\n')
         
         print(f"\n✓ Saved: {similarity_output}")
         
