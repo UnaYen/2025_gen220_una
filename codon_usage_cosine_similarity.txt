@@ -1,3 +1,4 @@
+Reference_File	Phocaeicola_vulgatus_ATCC_core_CDS.fna
 Filename	Cosine_Similarity
 Alistipes_shahii_DA73_cds_from_genomic.fna	0.751583
 Alistipes_shahii_DA73_core_CDS.fna	0.687379

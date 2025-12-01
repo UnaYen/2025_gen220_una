@@ -281,6 +281,8 @@ def main():
         similarities = []
         
         with open(similarity_output, 'w') as f:
+            # Write reference file information as first line
+            f.write(f"Reference_File\t{reference_name}\n")
             f.write(f"Filename\tCosine_Similarity\n")
             
             for filename in sorted(all_rscu.keys()):
