@@ -203,7 +203,7 @@ def main():
         print("  python3 codon_usage.py core_gene 'Phocaeicola_vulgatus_ATCC_core_CDS.fna'")
         print("\nOutput:")
         print("  - codon_count/count_*.txt: Codon frequency for each file")
-        print("  - rscu_*.txt: RSCU values for each file")
+        print("  - codon_count/rscu_*.txt: RSCU values for each file")
         print("  - codon_usage_cosine_similarity.txt: Similarity comparison (if compare_file specified)")
         sys.exit(1)
     
@@ -244,9 +244,9 @@ def main():
             rscu = calculate_rscu(codon_counts)
             all_rscu[basename] = rscu
             
-            # Save results
+            # Save results to codon_count directory
             count_output = os.path.join(codon_count_dir, f"count_{basename.replace('.fna', '.txt')}")
-            rscu_output = f"rscu_{basename.replace('.fna', '.txt')}"
+            rscu_output = os.path.join(codon_count_dir, f"rscu_{basename.replace('.fna', '.txt')}")
             
             save_codon_counts(basename, codon_counts, count_output)
             save_rscu(basename, rscu, rscu_output)
