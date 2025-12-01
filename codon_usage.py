@@ -225,6 +225,11 @@ def main():
         print(f"❌ No .fna files found in {directory}")
         sys.exit(1)
     
+    # If reference file is provided and it's not in the search directory, add it to the list
+    if compare_file and os.path.isfile(compare_file):
+        if compare_file not in fasta_files:
+            fasta_files.append(compare_file)
+    
     print(f"Found {len(fasta_files)} FASTA files\n")
     
     # Process each file
@@ -256,10 +261,13 @@ def main():
             print(f"  ✓ Unique codons: {len(codon_counts)}")
             print(f"  ✓ Saved: {count_output}, {rscu_output}")
             
-            # Track reference file for comparison
-            if compare_file and basename == compare_file:
-                reference_rscu = rscu
-                reference_name = basename
+    # Track reference file for comparison
+            if compare_file:
+                # Check both full path and basename
+                compare_basename = os.path.basename(compare_file)
+                if basename == compare_file or basename == compare_basename:
+                    reference_rscu = rscu
+                    reference_name = basename
             
         except Exception as e:
             print(f"  ❌ Error: {e}", file=sys.stderr)
