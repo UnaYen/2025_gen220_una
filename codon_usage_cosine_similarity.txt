@@ -1,31 +1,31 @@
-Filename	Pv_PV01_genomic.fna	Pd_p00_genomic.fna
-Alistipes_shahii_DA73_cds_from_genomic.fna	0.723447	0.870199
-Alistipes_shahii_DA73_core_CDS.fna	0.650211	0.816167
-Alistipes_shahii_DA73_other_CDS.fna	0.771903	0.903254
-Bacteroides_intestinalis_APC919_cds_from_genomic.fna	0.949423	0.928525
-Bacteroides_intestinalis_APC919_core_CDS.fna	0.929262	0.922726
-Bacteroides_intestinalis_APC919_other_CDS.fna	0.962501	0.930010
-Bacteroides_thetaiotaomicron_VPI-5482_cds_from_genomic.fna	0.952830	0.942625
-Bacteroides_thetaiotaomicron_VPI-5482_core_CDS.fna	0.930495	0.941174
-Bacteroides_thetaiotaomicron_VPI-5482_other_CDS.fna	0.965543	0.939488
-Bacteroides_thetaiotaomicron_jmh43_Host_clean_CDS.fna	0.947813	0.946359
-Bacteroides_thetaiotaomicron_jmh43_core_CDS.fna	0.928271	0.941294
-Bacteroides_thetaiotaomicron_jmh43_other_CDS.fna	0.961916	0.948959
-Bacteroides_uniformis_ATCC_cds_from_genomic.fna	0.920595	0.959216
-Bacteroides_uniformis_ATCC_core_CDS.fna	0.892246	0.949265
-Bacteroides_uniformis_ATCC_other_CDS.fna	0.947452	0.964748
-Escherichia_coli_BL21_cds_from_genomic.fna	0.851921	0.922882
-Escherichia_coli_BL21_core_CDS.fna	0.810241	0.895858
-Escherichia_coli_BL21_other_CDS.fna	0.860788	0.928126
-Escherichia_coli_MG1655_cds_from_genomic.fna	0.849800	0.921899
-Escherichia_coli_MG1655_core_CDS.fna	0.810836	0.896816
-Escherichia_coli_MG1655_other_CDS.fna	0.858462	0.927017
-Parabacteroides_distasonis_DA491_cds_from_genomic.fna	0.934188	0.948585
-Parabacteroides_distasonis_DA491_core_CDS.fna	0.904371	0.931015
-Parabacteroides_distasonis_DA491_other_CDS.fna	0.951614	0.957238
-Phocaeicola_dorei_HM719_Host_clean_CDS.fna	0.955987	0.930354
-Phocaeicola_dorei_HM719_core_CDS.fna	0.940406	0.915080
-Phocaeicola_dorei_HM719_other_CDS.fna	0.973133	0.950191
-Phocaeicola_vulgatus_ATCC_Host_clean_CDS.fna	0.951086	0.928350
-Phocaeicola_vulgatus_ATCC_core_CDS.fna	0.930982	0.916324
-Phocaeicola_vulgatus_ATCC_other_CDS.fna	0.966637	0.936634
+Filename	Pv_PV01_genomic.fna	Pd_p00_genomic.fna	Pad_PD491P1_genomic.fna	Ec_T4_genomic.fna	Ec_lamda_genomic.fna	Bu_EMB1_genomic.fna	Bt_SJC01_genomic.fna	Bt_jmh43_genomic.fna	Bi_ΦCrAss001_genomic.fna	As_AS73P1_genomic.fna
+Alistipes_shahii_DA73_cds_from_genomic.fna	0.723447	0.870199	0.676351	0.637367	0.829991	0.772263	0.747197	0.869921	0.489792	0.695509
+Alistipes_shahii_DA73_core_CDS.fna	0.650211	0.816167	0.606456	0.563685	0.771914	0.709288	0.679106	0.815799	0.418471	0.629617
+Alistipes_shahii_DA73_other_CDS.fna	0.771903	0.903254	0.723600	0.687221	0.866256	0.813320	0.792222	0.903038	0.538717	0.739937
+Bacteroides_intestinalis_APC919_cds_from_genomic.fna	0.949423	0.928525	0.848256	0.910529	0.944675	0.946653	0.919852	0.928431	0.815147	0.835050
+Bacteroides_intestinalis_APC919_core_CDS.fna	0.929262	0.922726	0.829601	0.884058	0.933457	0.936152	0.902334	0.922598	0.779295	0.820329
+Bacteroides_intestinalis_APC919_other_CDS.fna	0.962501	0.930010	0.860714	0.929029	0.950414	0.951854	0.931047	0.929944	0.841721	0.844306
+Bacteroides_thetaiotaomicron_VPI-5482_cds_from_genomic.fna	0.952830	0.942625	0.851174	0.909872	0.954690	0.943558	0.926619	0.942539	0.810601	0.838765
+Bacteroides_thetaiotaomicron_VPI-5482_core_CDS.fna	0.930495	0.941174	0.829092	0.878288	0.945286	0.929520	0.908237	0.941049	0.768453	0.821043
+Bacteroides_thetaiotaomicron_VPI-5482_other_CDS.fna	0.965543	0.939488	0.864629	0.930066	0.957453	0.950096	0.936719	0.939432	0.839341	0.848913
+Bacteroides_thetaiotaomicron_jmh43_Host_clean_CDS.fna	0.947813	0.946359	0.847052	0.901387	0.955288	0.940494	0.923705	0.946264	0.799001	0.836207
+Bacteroides_thetaiotaomicron_jmh43_core_CDS.fna	0.928271	0.941294	0.827334	0.875378	0.944399	0.927871	0.907004	0.941169	0.764799	0.819599
+Bacteroides_thetaiotaomicron_jmh43_other_CDS.fna	0.961916	0.948959	0.862202	0.921138	0.962452	0.948898	0.935779	0.948892	0.826022	0.848780
+Bacteroides_uniformis_ATCC_cds_from_genomic.fna	0.920595	0.959216	0.832435	0.859097	0.951922	0.928163	0.902644	0.959148	0.754389	0.829381
+Bacteroides_uniformis_ATCC_core_CDS.fna	0.892246	0.949265	0.807613	0.824895	0.935049	0.907341	0.878774	0.949182	0.714325	0.807616
+Bacteroides_uniformis_ATCC_other_CDS.fna	0.947452	0.964748	0.856453	0.893398	0.965276	0.946503	0.924950	0.964698	0.795983	0.849880
+Escherichia_coli_BL21_cds_from_genomic.fna	0.851921	0.922882	0.794982	0.800939	0.925548	0.880021	0.850826	0.922617	0.635000	0.790854
+Escherichia_coli_BL21_core_CDS.fna	0.810241	0.895858	0.747138	0.754605	0.890501	0.848413	0.809356	0.895540	0.587589	0.748356
+Escherichia_coli_BL21_other_CDS.fna	0.860788	0.928126	0.805287	0.810977	0.932677	0.886172	0.859597	0.927875	0.645800	0.799839
+Escherichia_coli_MG1655_cds_from_genomic.fna	0.849800	0.921899	0.793107	0.798433	0.924058	0.878369	0.848828	0.921633	0.632089	0.789185
+Escherichia_coli_MG1655_core_CDS.fna	0.810836	0.896816	0.748748	0.755122	0.891315	0.848874	0.810581	0.896499	0.588040	0.749737
+Escherichia_coli_MG1655_other_CDS.fna	0.858462	0.927017	0.803070	0.808224	0.931050	0.884374	0.857267	0.926765	0.642530	0.797883
+Parabacteroides_distasonis_DA491_cds_from_genomic.fna	0.934188	0.948585	0.883160	0.879752	0.943515	0.951831	0.930722	0.948585	0.757563	0.887324
+Parabacteroides_distasonis_DA491_core_CDS.fna	0.904371	0.931015	0.864529	0.844682	0.918966	0.932872	0.906897	0.931001	0.713093	0.874038
+Parabacteroides_distasonis_DA491_other_CDS.fna	0.951614	0.957238	0.893050	0.901266	0.957140	0.961594	0.943995	0.957247	0.786094	0.893287
+Phocaeicola_dorei_HM719_Host_clean_CDS.fna	0.955987	0.930354	0.867660	0.918458	0.949484	0.949748	0.926744	0.930291	0.825980	0.856026
+Phocaeicola_dorei_HM719_core_CDS.fna	0.940406	0.915080	0.853767	0.901950	0.934804	0.939140	0.910660	0.914995	0.806966	0.843294
+Phocaeicola_dorei_HM719_other_CDS.fna	0.973133	0.950191	0.882822	0.935948	0.967073	0.960779	0.945202	0.950163	0.846047	0.869992
+Phocaeicola_vulgatus_ATCC_Host_clean_CDS.fna	0.951086	0.928350	0.861531	0.911327	0.946511	0.944410	0.920555	0.928275	0.820312	0.850492
+Phocaeicola_vulgatus_ATCC_core_CDS.fna	0.930982	0.916324	0.847732	0.887940	0.932770	0.933685	0.903361	0.916224	0.788174	0.839518
+Phocaeicola_vulgatus_ATCC_other_CDS.fna	0.966637	0.936634	0.871206	0.930159	0.956009	0.951176	0.933521	0.936589	0.847608	0.857403
