@@ -1,6 +1,6 @@
 """
 Script to identify orthologs where Phocaeicola_vulgatus_ATCC has exactly one ortholog
-in each of the other 7 bacterial species.
+in each of the other 9 bacterial species.
 """
 
 import sys
@@ -19,11 +19,13 @@ OTHER_SPECIES = [
     "Escherichia_coli_BL21"
     ]
 
-# Get input file from command line argument or use default
-if len(sys.argv) > 1:
-    input_file = sys.argv[1]
-else:
-    input_file = "Orthogroups.txt"
+# Get input file from command line argument
+if len(sys.argv) < 2:
+    print("Usage: python find_ortholog.py <input_file>")
+    print("Error: Input file is required")
+    sys.exit(1)
+
+input_file = sys.argv[1]
 
 # Generate output file names based on input file
 if input_file.endswith(".txt"):
@@ -65,7 +67,7 @@ with open(output_file_detail, "w") as detail_f, open(output_file_summary, "w") a
     
     # Write summary of results to summary file
     for species in OTHER_SPECIES:
-        if results[species]:  # 只寫有結果的物種
+        if results[species]:  # species has orthologs found
             summary_f.write(f"{species}:\n")
             for accession in results[species]:
                 summary_f.write(f"{accession}\n")
