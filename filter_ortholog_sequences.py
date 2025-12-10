@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-根據 Orthologs_all.txt 將序列分類為 core genes 和 other genes
+according to Orthologs_all.txt, seperate core genes and other genes
 Usage: python3 filter_ortholog_sequences.py <species_name> <input_dir> <output_dir>
 """
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 def load_ortholog_accessions(ortholog_file):
     """
-    讀取 Orthologs_all.txt 並返回每個物種的 accession set
+    Read Orthologs_all.txt and return accession set of each species
     """
     ortholog_dict = {}
     current_species = None
@@ -21,38 +21,38 @@ def load_ortholog_accessions(ortholog_file):
             if not line:
                 continue
             
-            # 檢查是否是物種名稱行（以冒號結尾）
+            # check if this is a species line
             if line.endswith(':'):
                 current_species = line.rstrip(':')
                 ortholog_dict[current_species] = set()
             elif current_species:
-                # 這是一個 accession
+                # this is an accession
                 ortholog_dict[current_species].add(line)
     
     return ortholog_dict
 
 def extract_accession(header_line):
     """
-    從 FASTA header 提取 accession ID
-    處理兩種格式:
-    1. >ABR37731.1 ... (簡單格式)
-    2. >lcl|JH724132.1_cds_EIY40997.1_1 [protein_id=EIY40997.1] ... (複雜格式)
+    extract accession ID from FASTA header line
+    deal with two formats:
+    1. >ABR37731.1 ... (easy format)
+    2. >lcl|JH724132.1_cds_EIY40997.1_1 [protein_id=EIY40997.1] ... (conplex format)
     """
     header_line = header_line.lstrip('>')
     
-    # 首先嘗試從 [protein_id=...] 提取
+    # try extract from [protein_id=...]
     import re
     match = re.search(r'\[protein_id=([^\]]+)\]', header_line)
     if match:
         return match.group(1)
     
-    # 否則取第一個 token
+    # otherwise, take first word as accession
     accession = header_line.split()[0]
     return accession
 
 def process_fasta_file(input_fasta, ortholog_accessions, output_core, output_other):
     """
-    處理單個 FASTA 檔案，根據 accession 分類
+    deal with a FASTA file and separate sequences into core and other based on ortholog_accessions
     """
     core_count = 0
     other_count = 0
@@ -67,7 +67,7 @@ def process_fasta_file(input_fasta, ortholog_accessions, output_core, output_oth
                 line = line.rstrip('\n')
                 
                 if line.startswith('>'):
-                    # 寫入上一個序列
+                    # write the previous sequence if exists
                     if current_header and current_accession:
                         sequence = ''.join(current_seq)
                         if current_accession in ortholog_accessions:
@@ -77,14 +77,14 @@ def process_fasta_file(input_fasta, ortholog_accessions, output_core, output_oth
                             other_file.write(f"{current_header}\n{sequence}\n")
                             other_count += 1
                     
-                    # 提取新的 header 和 accession
+                    # get new header and accession
                     current_header = line
                     current_accession = extract_accession(line)
                     current_seq = []
                 else:
                     current_seq.append(line)
             
-            # 寫入最後一個序列
+            # write the last sequence
             if current_header and current_accession:
                 sequence = ''.join(current_seq)
                 if current_accession in ortholog_accessions:
@@ -107,49 +107,47 @@ def main():
     input_dir = sys.argv[2] if len(sys.argv) > 2 else "genome_seq"
     output_dir = sys.argv[3] if len(sys.argv) > 3 else "core_gene"
     
-    # 建立輸出目錄
+    # make directory
     os.makedirs(output_dir, exist_ok=True)
     
-    # 載入 ortholog accessions
+    # access ortholog accessions
     ortholog_file = "Orthologs_all.txt"
     if not os.path.exists(ortholog_file):
-        print(f"❌ 找不到 {ortholog_file}")
+        print(f"❌ can't find {ortholog_file}")
         sys.exit(1)
     
-    print(f"📖 載入 {ortholog_file}...")
+    print(f"📖 load {ortholog_file}...")
     ortholog_dict = load_ortholog_accessions(ortholog_file)
     
     if species_name not in ortholog_dict:
-        print(f"❌ 物種 '{species_name}' 不在 Orthologs_all.txt 中")
-        print(f"可用的物種: {', '.join(sorted(ortholog_dict.keys()))}")
+        print(f"❌ '{species_name}' not in Orthologs_all.txt")
+        print(f"available species: {', '.join(sorted(ortholog_dict.keys()))}")
         sys.exit(1)
     
     ortholog_accessions = ortholog_dict[species_name]
-    print(f"✓ 已載入 {len(ortholog_accessions)} 個 {species_name} ortholog accessions")
+    print(f"✓ load {len(ortholog_accessions)} {species_name} ortholog accessions")
     
-    # 找到相應的 .faa 和 .fna 檔案
-    # 使用更靈活的方式尋找檔案
+    # find .faa and .fna files
     species_pattern = species_name.replace(':', '')
     
-    # 建立可能的檔案名稱列表
     potential_files = []
     
-    # 方式 1: 完整物種名稱
+    # method 1: full species name
     potential_files.append(f"{input_dir}/{species_name}_protein.faa")
     potential_files.append(f"{input_dir}/{species_name}_cds_from_genomic.fna")
     
-    # 方式 2: 以底線分隔的物種名稱
-    short_name = species_name.split('_')[-1]  # 取最後一個部分
+    # method 2: short name
+    short_name = species_name.split('_')[-1]  # take last part as short name
     potential_files.append(f"{input_dir}/*{short_name}*protein.faa")
     potential_files.append(f"{input_dir}/*{short_name}*cds_from_genomic.fna")
     
-    # 實際檢查檔案
+    # check files
     faa_file = None
     fna_file = None
     
     for file_pattern in potential_files:
         if '*' in file_pattern:
-            # 使用 glob 尋找
+            # use glob to find matching files
             import glob
             matches = glob.glob(file_pattern)
             if matches:
@@ -164,38 +162,38 @@ def main():
                 fna_file = file_pattern
     
     if not faa_file or not fna_file:
-        print(f"\n❌ 找不到 {species_name} 的序列檔案")
-        print(f"  尋找位置: {input_dir}/")
-        print(f"  預期的 .faa 檔案: {faa_file if faa_file else '(未找到)'}")
-        print(f"  預期的 .fna 檔案: {fna_file if fna_file else '(未找到)'}")
+        print(f"\n❌ no {species_name} files found!")
+        print(f"  search loaction: {input_dir}/")
+        print(f"  expected .faa file: {faa_file if faa_file else '(未找到)'}")
+        print(f"  expected .fna file: {fna_file if fna_file else '(未找到)'}")
         sys.exit(1)
     
-    print(f"\n✓ 找到檔案:")
+    print(f"\n✓ file found:")
     print(f"  FAA: {faa_file}")
     print(f"  FNA: {fna_file}")
     
-    # 建立輸出檔案名稱
+    # create output file names
     output_prefix = os.path.join(output_dir, species_name)
     core_faa = f"{output_prefix}_core_protein.faa"
     other_faa = f"{output_prefix}_other_protein.faa"
     core_fna = f"{output_prefix}_core_CDS.fna"
     other_fna = f"{output_prefix}_other_CDS.fna"
     
-    # 處理 .faa 檔案
-    print(f"\n🔄 處理 .faa 檔案...")
+    # deal with .faa file
+    print(f"\n🔄 deal with .faa file...")
     core_count_faa, other_count_faa = process_fasta_file(faa_file, ortholog_accessions, core_faa, other_faa)
     print(f"✓ Core proteins: {core_count_faa}")
     print(f"✓ Other proteins: {other_count_faa}")
     
-    # 處理 .fna 檔案
-    print(f"\n🔄 處理 .fna 檔案...")
+    # deal with .fna file
+    print(f"\n🔄 deal with .fna file...")
     core_count_fna, other_count_fna = process_fasta_file(fna_file, ortholog_accessions, core_fna, other_fna)
     print(f"✓ Core CDS: {core_count_fna}")
     print(f"✓ Other CDS: {other_count_fna}")
     
-    # 統計輸出
+    # output summary
     print(f"\n{'='*60}")
-    print(f"輸出檔案:")
+    print(f"export file:")
     print(f"  {core_faa}")
     print(f"  {other_faa}")
     print(f"  {core_fna}")

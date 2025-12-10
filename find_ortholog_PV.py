@@ -19,7 +19,7 @@ OTHER_SPECIES = [
     "Escherichia_coli_BL21"
 ]
 
-# 需要至少 4 個物種有正交體的 6 個物種列表
+# at least 4 of the following 6 species must have orthologs
 CORE_SPECIES = [
     "Phocaeicola_dorei_HM719",
     "Bacteroides_thetaiotaomicron_VPI-5482",
@@ -31,13 +31,13 @@ CORE_SPECIES = [
 
 # 從命令行參數獲取輸入檔案名稱
 if len(sys.argv) < 2:
-    print("❌ 使用方式: python3 find_ortholog_PV.py <input_file>")
-    print("\n範例:")
+    print("❌ usage: python3 find_ortholog_PV.py <input_file>")
+    print("\nexample:")
     print("  python3 find_ortholog_PV.py Orthogroups_clean.txt")
     sys.exit(1)
 
 input_file = sys.argv[1]
-print(f"📖 讀取輸入檔案: {input_file}")
+print(f"📖 Read input file: {input_file}")
 
 # Dictionary to store results for each PV accession
 # Format: {pv_accession: {"core_species": set(), "orthologs": {species: [accessions]}}}
@@ -54,18 +54,18 @@ with open(input_file, "r") as f:
         
         # If there's exactly one Phocaeicola_vulgatus_ATCC
         if target_count == 1:
-            # 獲取 Phocaeicola_vulgatus_ATCC 的 accession
+            # get Phocaeicola_vulgatus_ATCC accession number
             pv_entry = [entry for entry in entries if entry.startswith(TARGET_SPECIES)][0]
             pv_accession = pv_entry.split("|")[1]
             
-            # 初始化該 PV accession 的資料（如果還沒有的話）
+            # initialize data structure for this PV accession if not exists
             if pv_accession not in pv_accession_data:
                 pv_accession_data[pv_accession] = {
                     "core_species": set(),
                     "orthologs": {species: [] for species in CORE_SPECIES}
                 }
             
-            # 檢查 CORE_SPECIES 中有多少個物種有正交體
+            # check each core species
             for core_species in CORE_SPECIES:
                 # Find entries from this species
                 species_entries = [entry for entry in entries if entry.startswith(core_species)]
@@ -74,7 +74,7 @@ with open(input_file, "r") as f:
                 if len(species_entries) == 1:
                     accession = species_entries[0].split("|")[1]
                     pv_accession_data[pv_accession]["core_species"].add(core_species)
-                    # 只在第一次見到這個物種時記錄
+                    # Avoid duplicates
                     if not pv_accession_data[pv_accession]["orthologs"][core_species]:
                         pv_accession_data[pv_accession]["orthologs"][core_species].append(accession)
                         print(f"Line {line_num}: PV {pv_accession} + {core_species} -> {accession}")

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# 批次處理所有物種的 ortholog 序列分類
+# deal wiht all species in batch
 
 cd /rhome/yyen008/bigdata/gen220/Project_Una_2025
 
-# 定義所有物種列表
+# define species array
 declare -a species=(
     "Phocaeicola_dorei_HM719"
     "Phocaeicola_vulgatus_ATCC"
@@ -19,23 +19,23 @@ declare -a species=(
 )
 
 echo "=========================================="
-echo "開始批次處理所有物種"
+echo "start dealing with all species"
 echo "=========================================="
 echo ""
 
 for species in "${species[@]}"; do
-    echo "處理: $species"
+    echo "deal with: $species"
     python3 filter_ortholog_sequences.py "$species" "genome_seq" "core_gene"
     echo ""
 done
 
 echo "=========================================="
-echo "完成所有物種處理"
+echo "completed dealing with all species"
 echo "=========================================="
 
-# 統計所有輸出檔案
+# summarize output
 echo ""
-echo "輸出檔案統計:"
+echo "output summary:"
 echo "---"
 cd core_gene
 for file in *_core_protein.faa; do
@@ -50,7 +50,7 @@ for file in *_core_protein.faa; do
 done
 
 echo ""
-echo "注意："
-echo "- CDS 欄位 = Coding DNA Sequence (包含 pseudo genes)"
-echo "- Protein 欄位 = Functional proteins (不包含 pseudo genes)"
-echo "- 若 CDS 和 Protein 數量不同，差異是因為存在 pseudo genes"
+echo "attention："
+echo "- CDS column = Coding DNA Sequence (including pseudo genes)"
+echo "- Protein column = Functional proteins (not including pseudo genes)"
+echo "- if the number of CDS and Protein are differnet, should caused by pseudo genes"
